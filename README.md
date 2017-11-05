@@ -1,8 +1,4 @@
-The following assumes the "data/" directory contains "us.sqlite,"
-which can be obtained here:
-https://cdn.radiocells.org/us.sqlite
-
-
+Note: The data/ directory must contain an appropriate sqlite database.  See the README in that directory.
 
 1) Find BSSIDs near some corrdinates:
 
