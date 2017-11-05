@@ -60,6 +60,7 @@ pair<double, double> estimate_coordinates_from_records(const vector<Record>& rec
     }
   }
 
+  //Unused for now.
   var = sqrt(var);
   
   return pair<double, double>(lat, lon);
