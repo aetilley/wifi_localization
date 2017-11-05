@@ -1,3 +1,5 @@
+A simple commmand line tool to estimate latitude and longitude from nearby BSSIDs and corresponding RSSIs.  Inspired from the work here https://github.com/openbmap/radiocells-nlp-android/.
+
 Note: The data/ directory must contain an appropriate sqlite database.  See the README in that directory.
 
 
