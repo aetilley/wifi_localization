@@ -11,7 +11,7 @@ using std::vector;
 using std::pair;
 using std::map;
 
-const char* database_path = "./data/us.sqlite";
+const char* database_path = "/home/pi/web/localization_service/data/us.sqlite";
 const char* table_name = "wifi_zone";
 const char* latitude_column_name = "latitude";
 const char* longitude_column_name = "longitude";
@@ -59,7 +59,7 @@ vector<Record> query_bssids(const vector<string>& bssids,
   char* exec_error_message = 0;
   int exec_status;
 
-  vector<Record> result = {};
+  vector<Record> result;
   
   int num_bssids = bssids.size();
   if (num_bssids == 0) {
@@ -95,7 +95,7 @@ std::vector<Record>
 
   sqlite3* pDB;
   int status;
-  std::vector<Record> query_results = {};
+  std::vector<Record> query_results;
   
   status = sqlite3_open(database_path, &pDB);
 
@@ -160,7 +160,7 @@ get_records_for_coordinates(double latitude, double longitude,
 
   sqlite3* pDB;
   int status;
-  std::vector<Record> query_results = {};
+  std::vector<Record> query_results;
   
   status = sqlite3_open(database_path, &pDB);
 

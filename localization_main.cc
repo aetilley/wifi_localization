@@ -5,6 +5,7 @@
 
 #include "lib/query_functions.h"
 #include "lib/estimation_functions.h"
+#include "lib/drop_old.h"
 
 using std::string;
 using std::vector;
@@ -19,7 +20,7 @@ int main(int argc, char* argv[]) {
   }
 
   if (argc == 1) {
-    std::cout << "No BSSIDs provided.\n";
+    std::cout << "No BSSIDs were provided.\n";
     return 1;
   }
   
@@ -35,13 +36,14 @@ int main(int argc, char* argv[]) {
     rssis[bssid] = rssi;
   }  
   
-  std::cout << "Attempting to look up the following points:\n";
+  std::cout << "Querying database for the following BSSIDs:\n";
   
   for (int i = 0 ; i < bssids.size() ; i++){
     string bssid = bssids[i];
     std::cout << "BSSID " << bssid << std::endl;
     std::cout << "RSSI " << rssis[bssid] << std::endl;
   }
+  std::cout << "\n";
 
   vector<Record> records =
     get_records_for_bssids(bssids);
@@ -51,7 +53,10 @@ int main(int argc, char* argv[]) {
     return 1;
   }
   
-  std::cout << "Found the following matching records:" << std::endl;
+  records = drop_old_records(records);
+
+
+  std::cout << "Found the following matching records (taking latest for each BSSID):" << std::endl;
   for (Record record : records) {
     std::cout << "bssid: " << record.bssid << std::endl;
     std::cout << "last_updated: " << record.last_updated << std::endl;
@@ -60,6 +65,7 @@ int main(int argc, char* argv[]) {
   }
   std::cout << "\n";
 
+    
   std::pair<double, double> coordinates =
     estimate_coordinates_from_records(records, rssis);
 
